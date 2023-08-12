@@ -11,6 +11,7 @@ import RNFS from "react-native-fs";
 import ListItem from "../Component/ListItem";
 import { useNavigation } from "@react-navigation/native";
 import { folderPathCtx } from "../store/infoFolder";
+
 import path from "path";
 const ImagesScreen = () => {
   const [images, setimages] = useState();
@@ -18,10 +19,15 @@ const ImagesScreen = () => {
   const listFilesInStatusesFolder = useCallback(async () => {
     try {
       if (PermissionsAndroid.RESULTS.GRANTED) {
-        // console.log("Images Path", imagesPath);
+        console.log("Images Path", imagesPath);
         if (!imagesPath) return;
-        const files = await RNFS.readdir(path.join(imagesPath));
+        const files = await RNFS.readdir(path.join(
+          imagesPath
+        ));
+        console.log("files", files)
         const filteredFiles = files.filter((file) => {
+          console.log("file", file)
+
           const lowerCaseFile = file.toLowerCase();
           return (
             lowerCaseFile.endsWith(".jpeg") ||
@@ -29,6 +35,7 @@ const ImagesScreen = () => {
             lowerCaseFile.endsWith(".png")
           );
         });
+        console.log("filtered", filteredFiles)
         setimages((p) => filteredFiles);
       } else {
         console.log("External storage permission denied.");
@@ -36,7 +43,7 @@ const ImagesScreen = () => {
     } catch (error) {
       console.log("Error reading .Statuses folder for Images:", error);
     }
-  }, [imagesPath]);
+  }, [imagesPath, images]);
   useEffect(() => {
     listFilesInStatusesFolder();
   }, [imagesPath]);

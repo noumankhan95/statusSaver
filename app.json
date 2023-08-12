@@ -4,10 +4,12 @@
     "slug": "whatsappstatussaver",
     "version": "1.0.0",
     "backgroundColor": "#4f4949",
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "extra": {
       "eas": {
-        "projectId": "56b2c9b9-9365-4fc4-8744-0272d83ebb35"
+        "projectId": "bdbb74fd-88b2-4bb9-a510-ce8578722486"
       }
     }
   }

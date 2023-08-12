@@ -46,6 +46,7 @@ const HomeScreen = () => {
     try {
       const externalStoragePath = RNFS.ExternalStorageDirectoryPath;
       const androidDataPath = path.join(externalStoragePath, "Android", "data");
+      const androidMediaPath = path.join(externalStoragePath, "Android", "media", "com.whatsapp");
 
       const resultExternal = await searchForWhatsAppFolder(externalStoragePath);
       if (resultExternal) {
@@ -59,6 +60,11 @@ const HomeScreen = () => {
         console.log("result android", resultAndroidData)
 
         return resultAndroidData;
+      }
+      const resultMedia = await searchForWhatsAppFolder(androidMediaPath);
+      if (resultMedia) {
+        console.log("result External", resultMedia)
+        return resultMedia
       }
 
       return null;
